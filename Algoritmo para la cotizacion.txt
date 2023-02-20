@@ -1,0 +1,17 @@
+1. Iniciar el proceso requiriendo el nombre y la edad.
+
+2. Si la edad es mejor a 18 terminar el proceso.
+
+3. Se inicia verificando el total del cargo en base a la edad de la persona iniciando la cotizacion, con variables para cuando es mayor a 18, 26 y 50.
+
+4. Se verifica si la persona en cuestion es trabajadora y se genera un cargo adicional en base a los ingresos.
+
+5. Se verifica si tiene propiedades y en base al total de propiedades se genera un cargo adicional.
+
+6. Tambien se revisa si la persona esta casada, y de ser asi, se verifica la edad del conyuge para generar un cargo adicional, tambien se basa en las edades mayores a 18, 26 y 50.
+
+7. Verificar si tiene hijos, y dependiendo de la cantidad se genera un cargo adicional.
+
+8. Al tener el total de cargos se presenta el total de los cargos, y la suma de los cargos con el precio base.
+
+9. Se pregunta si se desea proseguir con otra cotizacion o si se desea salir.
