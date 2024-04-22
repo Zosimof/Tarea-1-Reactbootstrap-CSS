@@ -1,3 +1,0 @@
-El problema general encontrado en el programa de la compañia de seguros TK-U es que el programa base no cuenta con las opciones de cargos adicionales en base a la cantidad de hijos, la cantidad de propiedades o la edad de el/la conyuge.
-
-Al implementarse las variables adicionales pueden mejorar la forma en que se calculan los totales del seguro y continuar hasta que sea necesario salir.
