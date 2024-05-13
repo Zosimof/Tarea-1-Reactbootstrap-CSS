@@ -1,28 +1,35 @@
 import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
-import { addGoal } from '../../Reducers/goalsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodo } from '../../Reducers/todoSlice';
+import { addGoals } from '../../Reducers/goalsSlice';
 
 function Formulario(props) {
+  const option = useSelector((state) => state.option.value);
   const inputRefName = useRef();
   const inputRefDescripcion = useRef();
   const inputRefdueDate = useRef();
   
   const dispatch = useDispatch();
-  const [nextId, setNextId] = useState(1); 
-
   const addItem = (e) => {
+    let timestamp = Date.now() + Math.random();
     e.preventDefault();
-    dispatch(addGoal({
-      name: inputRefName.current.value,
-      descripcion: inputRefDescripcion.current.value,
-      dueDate: inputRefdueDate.current.value,
-      id: nextId
+    if(option === 'goals') 
+      dispatch(addGoals({
+      'name': inputRefName.current.value,
+      'descripcion': inputRefDescripcion.current.value,
+      'dueDate': inputRefdueDate.current.value,
+      'id': timestamp
     }));
-    setNextId(prevId => prevId + 1); 
+    if(option ==='tasks')
+      dispatch(addTodo({
+        'name': inputRefName.current.value,
+        'descripcion': inputRefDescripcion.current.value,
+        'dueDate': inputRefdueDate.current.value,
+        'id': timestamp
+      }));
   };
-
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formName">

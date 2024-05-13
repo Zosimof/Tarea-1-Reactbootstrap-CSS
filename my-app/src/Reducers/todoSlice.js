@@ -1,12 +1,12 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-export const goalsSlice = createSlice({
-    name: 'goals',
+export const todoSlice = createSlice({
+    name: 'todos',
     initialState: {
         value: [{}]
     },
     reducers: {
-        addGoals: (state, action) => {
+        addTodo: (state, action) => {
             console.log(action.payload);
             state.value.push(action.payload);
             fetch("http://localhost:3001/tasks/addTasks",{
@@ -15,17 +15,17 @@ export const goalsSlice = createSlice({
                     "Content-Type":"application/json",
                     "Authorization":"123456"
                 },
-                body:JSON.stringify(action.payload)
+                body: JSON.stringify(action.payload)
             })
             .catch(err =>{ 
                 console.log(err);
             })
         },
-        initaddGoal: (state, action) => {
+        initaddTodo: (state, action) => {
             console.log(action.payload);
             state.value.push(action.payload);
     },
-    removeGoal: (state, action) => {
+    removeTodo: (state, action) => {
         state.value = state.value.filter((task)=> task.id!==action.payload)
         fetch("http://localhost:3001/tasks/removeTask/"+action.payload,{
             method:"DELETE",
@@ -40,6 +40,8 @@ export const goalsSlice = createSlice({
 }
 })
 
-export const {addGoals, initaddGoal, removeGoal} = goalsSlice.actions;
-export const selectGoals = (state) => state.goals.value
-export default goalsSlice.reducer;
+
+export const { addTodo, initaddTodo, removeTodo } = todoSlice.actions
+export const selectTodos = (state) => state.todos.value
+
+export default todoSlice.reducer

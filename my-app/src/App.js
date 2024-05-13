@@ -7,21 +7,40 @@ import Menu from './Components/Menu/Menu';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { initaddTodo } from './Reducers/todoSlice';
+import { initaddGoal } from './Reducers/goalsSlice';
 
-const tareas = [{
-  name: 'Terminar Proyecto',
-  descripcion: 'Realizar todas las actividades del curso',
-  dueDate: '05/10/2024'
-},
-{
-  name: 'Terminar Tarea 2',
-  descripcion: 'Realizar todas las actividades del curso',
-  dueDate: '04/28/2024'
-}]
+
+
 
 function App() {
   const goals = useSelector((state)=>state.goals.value);
+  const option = useSelector((state)=>state.option.value);
+  const todos = useSelector((state)=>state.todos.value);
+  const dispatch = useDispatch();
+  function initFetch() {
+    fetch("http://localhost:3001/tasks/getTasks",{
+      method:"GET",
+      headers: {
+          "Content-Type":"application/json",
+          "Authorization":"123456"
+      }
+  })
+  .then((response) =>{
+    return response.json()
+  }).then((response) => {
+    response.map((task) => {
+      dispatch(initaddTodo(task));
+    })
+  }).catch(err =>{ 
+      console.log(err);
+  })
+  }
+  useEffect(() =>{
+    initFetch();
+  },[])
 
   return (
 
@@ -41,8 +60,15 @@ function App() {
           </Row>
           <Row>
         <div className='scrolling'>
-          { goals.map((tarea,index)=>(
-          <Item key={index} id={tarea.id} name={tarea.name} descripcion={tarea.descripcion} dueDate={tarea.dueDate}/>
+          { option==='tasks' &&
+          todos.map((todo,index)=>(
+          <Item key={index} id={todo.id} name={todo.name} descripcion={todo.descripcion} dueDate={todo.dueDate}/>
+        ))}
+        </div>
+        <div className='scrolling'>
+          {  option==='goals' &&
+          goals.map((goal,index)=>(
+          <Item key={index} id={goal.id} name={goal.name} descripcion={goal.descripcion} dueDate={goal.dueDate}/>
         ))}
         </div>
         </Row>

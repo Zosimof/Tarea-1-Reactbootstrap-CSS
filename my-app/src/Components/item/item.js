@@ -1,15 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './item.scss';
-import { useDispatch } from 'react-redux';
-import { removeGoal } from '../../Reducers/removeSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeTodo } from '../../Reducers/todoSlice';
+import { removeGoal } from '../../Reducers/goalsSlice';
+
 
 
 function Item(props) {
+  const option = useSelector((state) => state.option.value);
   const dispatch = useDispatch();
-
-  const handleRemove = () => {
-    dispatch(removeGoal({ id: props.id }));
+  const removeItem = (e) => {
+    e.preventDefault();
+    if(option === 'goals') 
+      dispatch(removeGoal(props.id))
+    if(option === 'tasks')
+    dispatch(removeTodo(props.id));
   };
 
   return (
@@ -30,8 +36,7 @@ function Item(props) {
         </Card.Text>
         </Card.Body>
         <Card.Body>
-        <Button variant="info">Editar</Button> 
-        <Button variant="info" onClick={handleRemove}>Remover</Button>
+        <Button variant="info" onClick={removeItem}>Remover</Button>
       </Card.Body>
     </Card>
   );
