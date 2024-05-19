@@ -13,7 +13,7 @@ export const todoSlice = createSlice({
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json",
-                    "Authorization":"123456"
+                    "authorization":"123456"
                 },
                 body: JSON.stringify(action.payload)
             })
@@ -31,7 +31,7 @@ export const todoSlice = createSlice({
             method:"DELETE",
             headers: {
                 "Content-Type":"application/json",
-                "Authorization":"123456"
+                "authorization":"123456"
             },
         }).catch(err =>{ 
             console.log(err);

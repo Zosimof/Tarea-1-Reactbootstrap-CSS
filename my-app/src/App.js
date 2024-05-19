@@ -25,7 +25,7 @@ function App() {
       method:"GET",
       headers: {
           "Content-Type":"application/json",
-          "Authorization":"123456"
+          "authorization":"123456"
       }
   })
   .then((response) =>{
@@ -38,9 +38,9 @@ function App() {
       console.log(err);
   })
   }
-  useEffect(() =>{
-    initFetch();
-  },[])
+    useEffect(() =>{
+      initFetch();
+    },[])
 
   return (
 
@@ -62,13 +62,13 @@ function App() {
         <div className='scrolling'>
           { option==='tasks' &&
           todos.map((todo,index)=>(
-          <Item key={index} id={todo.id} name={todo.name} descripcion={todo.descripcion} dueDate={todo.dueDate}/>
+          <Item key={index} id={todo.id} name={todo.name} description={todo.description} dueDate={todo.dueDate}/>
         ))}
         </div>
         <div className='scrolling'>
-          {  option==='goals' &&
+          { option==='goals' &&
           goals.map((goal,index)=>(
-          <Item key={index} id={goal.id} name={goal.name} descripcion={goal.descripcion} dueDate={goal.dueDate}/>
+          <Item key={index} id={goal.id} name={goal.name} description={goal.description} dueDate={goal.dueDate}/>
         ))}
         </div>
         </Row>

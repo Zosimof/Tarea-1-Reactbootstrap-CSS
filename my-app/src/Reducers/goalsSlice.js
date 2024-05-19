@@ -9,11 +9,11 @@ export const goalsSlice = createSlice({
         addGoals: (state, action) => {
             console.log(action.payload);
             state.value.push(action.payload);
-            fetch("http://localhost:3001/tasks/addTasks",{
+            fetch("http://localhost:3001/goals/addGoals",{
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json",
-                    "Authorization":"123456"
+                    "authorization":"123456"
                 },
                 body:JSON.stringify(action.payload)
             })
@@ -27,11 +27,11 @@ export const goalsSlice = createSlice({
     },
     removeGoal: (state, action) => {
         state.value = state.value.filter((task)=> task.id!==action.payload)
-        fetch("http://localhost:3001/tasks/removeTask/"+action.payload,{
+        fetch("http://localhost:3001/goals/removeGoals/"+action.payload,{
             method:"DELETE",
             headers: {
                 "Content-Type":"application/json",
-                "Authorization":"123456"
+                "authorization":"123456"
             },
         }).catch(err =>{ 
             console.log(err);
