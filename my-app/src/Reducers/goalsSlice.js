@@ -26,7 +26,7 @@ export const goalsSlice = createSlice({
             state.value.push(action.payload);
     },
     removeGoal: (state, action) => {
-        state.value = state.value.filter((task)=> task.id!==action.payload)
+        state.value = state.value.filter((task)=> task._id!==action.payload)
         fetch("http://localhost:3001/goals/removeGoals/"+action.payload,{
             method:"DELETE",
             headers: {

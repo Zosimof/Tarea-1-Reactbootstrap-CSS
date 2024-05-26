@@ -21,27 +21,39 @@ function App() {
   const todos = useSelector((state)=>state.todos.value);
   const dispatch = useDispatch();
   function initFetch() {
-    fetch("http://localhost:3001/tasks/getTasks",{
-      method:"GET",
+    const tasksRequest = fetch("http://localhost:3001/tasks/getTasks", {
+      method: "GET",
       headers: {
-          "Content-Type":"application/json",
-          "authorization":"123456"
+        "Content-Type": "application/json",
+        "authorization": "123456"
       }
-  })
-  .then((response) =>{
-    return response.json()
-  }).then((response) => {
-    response.map((task) => {
-      dispatch(initaddTodo(task));
-    })
-  }).catch(err =>{ 
-      console.log(err);
-  })
+    }).then(response => response.json());
+  
+    const goalsRequest = fetch("http://localhost:3001/goals/getGoals", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": "123456"
+      }
+    }).then(response => response.json());
+  
+    Promise.all([tasksRequest, goalsRequest])
+      .then(([tasks, goals]) => {
+        tasks.forEach(task => {
+          dispatch(initaddTodo(task));
+        });
+        goals.forEach(goal => {
+          dispatch(initaddGoal(goal));
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-    useEffect(() =>{
-      initFetch();
-    },[])
-
+  
+  useEffect(() => {
+    initFetch();
+  }, []);
   return (
 
     <div className="App">
@@ -62,13 +74,13 @@ function App() {
         <div className='scrolling'>
           { option==='tasks' &&
           todos.map((todo,index)=>(
-          <Item key={index} id={todo.id} name={todo.name} description={todo.description} dueDate={todo.dueDate}/>
+          <Item key={index} id={todo._id} name={todo.name} description={todo.description} dueDate={todo.dueDate}/>
         ))}
         </div>
         <div className='scrolling'>
           { option==='goals' &&
           goals.map((goal,index)=>(
-          <Item key={index} id={goal.id} name={goal.name} description={goal.description} dueDate={goal.dueDate}/>
+          <Item key={index} id={goal._id} name={goal.name} description={goal.description} dueDate={goal.dueDate}/>
         ))}
         </div>
         </Row>

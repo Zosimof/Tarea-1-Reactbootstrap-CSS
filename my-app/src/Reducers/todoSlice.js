@@ -26,7 +26,7 @@ export const todoSlice = createSlice({
             state.value.push(action.payload);
     },
     removeTodo: (state, action) => {
-        state.value = state.value.filter((task)=> task.id!==action.payload)
+        state.value = state.value.filter((task)=> task._id!==action.payload)
         fetch("http://localhost:3001/tasks/removeTask/"+action.payload,{
             method:"DELETE",
             headers: {

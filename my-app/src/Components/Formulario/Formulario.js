@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,21 +14,18 @@ function Formulario(props) {
   const dispatch = useDispatch();
   
   const addItem = (e) => {
-    let timestamp = Date.now() + Math.random(); 
     e.preventDefault();
     if(option === 'goals') 
       dispatch(addGoals({
       'name': inputRefName.current.value,
       'description': inputRefDescription.current.value,
-      'dueDate': inputRefdueDate.current.value,
-      'id':timestamp
+      'dueDate': inputRefdueDate.current.value
     }));
     if(option ==='tasks')
       dispatch(addTodo({
         'name': inputRefName.current.value,
         'description': inputRefDescription.current.value,
-        'dueDate': inputRefdueDate.current.value,
-        'id':timestamp
+        'dueDate': inputRefdueDate.current.value
       }));
   };
 

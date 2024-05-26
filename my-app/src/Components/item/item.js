@@ -26,7 +26,7 @@ function Item(props) {
           Descripcion
           </Card.Text>
         <Card.Text >
-        {props.descripcion}
+        {props.description}
         </Card.Text>
         <Card.Text className='fw-bold'>
           Fecha de Vencimiento
